@@ -6,7 +6,7 @@ each skill by hand.
 
 ## Why this exists
 
-Workday's skills picker isn't a plain HTML `<select>` — it's a React-driven
+Workday's skills picker isn't a plain HTML `<select>`, it's a React-driven
 search box + virtualized checkbox list. Filling it in requires typing a
 search term, waiting for results, and clicking the matching option, one
 skill at a time, which gets tedious fast on applications with long skill
@@ -15,7 +15,7 @@ names, and it searches for and checks each one in turn.
 
 It's written specifically against Workday's DOM structure
 (`data-automation-id` attributes), but the driver logic (typing, waiting,
-matching, clicking) is generic enough to adapt to other sites — see
+matching, clicking) is generic enough to adapt to other sites, see
 [Adapting to another site](#adapting-to-another-site) below.
 
 ## Usage
@@ -33,7 +33,7 @@ matching, clicking) is generic enough to adapt to other sites — see
 5. The script runs automatically (the last line calls `addSkills(SKILLS)`
    for you) and logs its progress: `Searching:`, `Selecting:`, `Checked:`,
    or `No exact match found for:` per skill. When it finishes it prints
-   `Done. Not found: [...]` listing anything it couldn't match or check —
+   `Done. Not found: [...]` listing anything it couldn't match or check,
    double-check and add those manually.
 
 You can also call `addSkills([...])` again yourself in the console with a
@@ -44,7 +44,7 @@ stay defined after the first paste.
 
 If the page is slow (or the script is moving faster than the UI can keep
 up, causing missed matches), adjust the `DELAY` values near the top of the
-file — they're all in milliseconds. If it's fast and reliable for you, you
+file, they're all in milliseconds. If it's fast and reliable for you, you
 can lower them to speed things up.
 
 ## How it works
@@ -58,7 +58,7 @@ can lower them to speed things up.
 - `dispatchRealClick()` fires a full `pointerdown`/`mousedown`/`pointerup`/
   `mouseup`/`click` sequence at the element's on-screen center, because
   React ignores a bare `el.click()`.
-- The results list is **virtualized** — only rows near the current scroll
+- The results list is **virtualized**, only rows near the current scroll
   position actually exist in the DOM, so a match that hasn't scrolled into
   view yet can't be queried for directly. Instead, `getHighlightedLabel()`
   reads whichever row is currently marked
@@ -73,11 +73,11 @@ match → click) should carry over, but you'll need to rewrite the
 **site-specific selectors** section near the top of the file for the new
 site's DOM:
 
-- `findSkillsInput()` — locate the search box.
-- `getHighlightedMenuItem()` — locate the currently-highlighted result row.
-- `getHighlightedLabel()` — read that row's display text.
-- `anyMenuItemPresent()` — detect that results have rendered at all.
-- `isHighlightedChecked()` — detect whether the highlighted row is already
+- `findSkillsInput()`: locate the search box.
+- `getHighlightedMenuItem()`: locate the currently-highlighted result row.
+- `getHighlightedLabel()`: read that row's display text.
+- `anyMenuItemPresent()`: detect that results have rendered at all.
+- `isHighlightedChecked()`: detect whether the highlighted row is already
   checked/selected.
 
 Open DevTools' Elements panel on the target site's skills widget, search
@@ -90,5 +90,5 @@ This automates form-filling on a page you're already legitimately filling
 out yourself. Use it for your own job applications; it doesn't bypass any
 login, authentication, or access control. Test it with a small skills list
 first, and always review what actually got checked before submitting the
-application — matching is exact-string, and anything the script reports
+application. Matching is exact-string, and anything the script reports
 under "Not found" needs to be added by hand.
