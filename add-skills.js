@@ -69,7 +69,7 @@ function dispatchRealClick(el) {
 
 // --- Site-specific selectors ---
 // This section is written for Workday's skills picker. If you're adapting
-// this script for a different ATS, this is the part you'll need to change —
+// this script for a different ATS, this is the part you'll need to change,
 // see README.md's "Adapting to another site" section.
 
 function findSkillsInput() {
@@ -86,7 +86,7 @@ function getHighlightedMenuItem() {
 // The virtualized list only renders rows near the current scroll position, so a
 // not-yet-visible match won't be in the DOM at all. Instead of querying for it
 // directly, track whatever item is currently highlighted (data-automation-selected="true")
-// as we arrow down — that's what actually gets checked when Enter is pressed.
+// as we arrow down, that's what actually gets checked when Enter is pressed.
 function getHighlightedLabel() {
   const menuItem = getHighlightedMenuItem();
   if (!menuItem) return null;
@@ -123,7 +123,7 @@ function waitFor(predicateFn, timeout = 6000, interval = 200) {
 async function addSkills(skills) {
   const input = findSkillsInput();
   if (!input) {
-    console.error("Could not find the skills search input — inspect the page and update findSkillsInput().");
+    console.error("Could not find the skills search input, inspect the page and update findSkillsInput().");
     return;
   }
 
